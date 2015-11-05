@@ -120,33 +120,10 @@
 #if TARGET_OS_TV
     [_titleLabel sizeToFit];
     [_titleLabel setWidth:[[self contentView] bounds].size.width];
-#endif
-}
 
-#if TARGET_OS_TV
-- (void)didUpdateFocusInContext:(UIFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator
-{
-    if (self.focused)
-    {
-        [self setHighlighted:YES];
-    }
-    else
-    {
-        [self setHighlighted:NO];
-    }
-}
-
-- (BOOL)shouldUpdateFocusInContext:(UIFocusUpdateContext *)context
-{
-    if ([context nextFocusedView] == self)
-    {
-        [self setHighlighted:YES];
-    }
-    else if ([context previouslyFocusedView] == self)
   
     if ([_imageView image])
     {
-        [self setHighlighted:NO];
         CGRect imageFrame = _imageView.frame;
         CGFloat imageAspect = _imageView.image.size.height/_imageView.image.size.width;
         
@@ -158,37 +135,6 @@
         
         [_imageView setFrame:imageFrame];
     }
-
-    return YES;
-}
-
-- (void)setHighlighted:(BOOL)highlighted
-{
-	[super setHighlighted:highlighted];
-	
-	if (highlighted)
-	{
-		[UIView animateWithDuration:0.3
-							  delay:0
-							options:UIViewAnimationOptionBeginFromCurrentState
-						 animations:^{
-                             [self.imageView setTransform:CGAffineTransformMakeScale(1.33, 1.33)];
-                             [self.missingArtworkView setTransform:CGAffineTransformMakeScale(1.33, 1.33)];
-						 }
-						 completion:NULL];
-	}
-	else
-	{
-		[UIView animateWithDuration:0.3
-							  delay:0
-							options:UIViewAnimationOptionBeginFromCurrentState
-						 animations:^{
-                             [self.imageView setTransform:CGAffineTransformIdentity];
-                             [self.missingArtworkView setTransform:CGAffineTransformIdentity];
-						 }
-						 completion:NULL];
-	}
-}
   
 #endif
 }
