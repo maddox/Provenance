@@ -29,13 +29,13 @@
 	{
 		_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height - 44)];
 		[_imageView setContentMode:UIViewContentModeScaleAspectFit];
-//        [_imageView setAdjustsImageWhenAncestorFocused:YES];
 		[_imageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, [_imageView frame].size.height, frame.size.width, 44)];
 
 #if TARGET_OS_TV
         [_titleLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        [_imageView setAdjustsImageWhenAncestorFocused:YES];
 #else
         [_titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
 #endif
