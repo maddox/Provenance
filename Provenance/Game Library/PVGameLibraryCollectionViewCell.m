@@ -143,8 +143,20 @@
         [self setHighlighted:YES];
     }
     else if ([context previouslyFocusedView] == self)
+  
+    if ([_imageView image])
     {
         [self setHighlighted:NO];
+        CGRect imageFrame = _imageView.frame;
+        CGFloat imageAspect = _imageView.image.size.height/_imageView.image.size.width;
+        
+        CGFloat newWidth = imageFrame.size.width;
+        CGFloat newHeight = newWidth * imageAspect;
+        
+        imageFrame.size.width = newWidth;
+        imageFrame.size.height = newHeight;
+        
+        [_imageView setFrame:imageFrame];
     }
 
     return YES;
@@ -177,7 +189,9 @@
 						 completion:NULL];
 	}
 }
+  
 #endif
+}
 
 - (void)setSelected:(BOOL)selected
 {
